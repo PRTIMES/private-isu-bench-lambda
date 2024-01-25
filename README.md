@@ -18,17 +18,38 @@ GOOS=linux GOARCH=amd64 go build -o benchmarker
 6. 本リポジトリのmain.goをビルドし、ファイルをzip化し、S3にアップロードする。
 7. Lambdaの「コードソース」の「アップロード元」から先ほどアップロードしたzipファイルのURLを入力する。
 8. Lambdaで環境変数を設定する。
-   1. `MACKEREL_API_KEY`: MackerelのAPIKey
-   2. `MACKEREL_SERVICE_NAME`: Mackerelのサービス名
-   3. `GOOGLE_APPLICATION_CREDENTIALS`: 認証情報Jsonファイル
-   4. `SPREADSHEET_RANGE`: チーム情報が記載されているシート名と範囲（シート1のA2からB50の場合。`シート1!A2:B50`）
-   5. `SPREADSHEET_ID`: スプレッドシートID
+
+| Environment Variable             | Description   |
+|----------------------------------|---------------|
+| `MACKEREL_API_KEY`              | Mackerelから発行されるAPIキー |
+| `MACKEREL_SERVICE_NAME`         | Mackerelのサービス名          |
+| `SPREADSHEETID`                | GoogleスプレッドシートのID    |
+| `SPREADSHEET_CREDENTIALS_JSON` | Google APIの認証情報を含むJSON（サービスアカウントからダウンロード）|
+| `SPREADSHEET_RANGE`            | チーム情報が記載されているシート名と範囲（シート1のA2からB50の場合。`シート1!A2:B50`） |
+
 9.  private-isuを動かしているサーバー上で、Lambda関数のURLを叩く。
 ```sh
 curl <your-lambda-function-url>
 # レスポンス例
 {"pass":true,"score":623,"success":565,"fail":2,"messages":["リクエストがタイムアウトしました (POST /login)"]}
 ```
+
+### [lambroll](https://github.com/fujiwara/lambroll) を活用したデプロイ
+1~5については上記と同様。Makefileで以下の環境変数を設定する。
+
+| Environment Variable             | Description   |
+|----------------------------------|---------------|
+| `MACKEREL_API_KEY`              | Mackerelから発行されるAPIキー |
+| `MACKEREL_SERVICE_NAME`         | Mackerelのサービス名          |
+| `SPREADSHEETID`                | GoogleスプレッドシートのID    |
+| `SPREADSHEET_CREDENTIALS_JSON` | Google APIの認証情報を含むJSON（サービスアカウントからダウンロード）|
+| `SPREADSHEET_RANGE`            | チーム情報が記載されているシート名と範囲（シート1のA2からB50の場合。`シート1!A2:B50`） |
+| `FUNCTION_NAME`                 | AWS Lambda関数の名前  |
+| `FUNCTION_ROLE`                 | 関数を実行するときのAWSロール |
+| `S3_BUCKET`                    | 関数のデプロイ先のS3バケット  |
+| `S3_KEY`                        | デプロイするときのS3のキー    |
+
+その後`make deploy_private_isu_bench_lambda` を実行し、デプロイが完了する。
 
 ## ディレクトリ構成
 ```

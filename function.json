@@ -1,0 +1,38 @@
+{
+  "Architectures": [
+    "x86_64"
+  ],
+  "Description": "private-isuのベンチマーカーをLambdaで実行する",
+  "Environment": {
+    "Variables": {
+      "MACKEREL_API_KEY": "{{ must_env `MACKEREL_API_KEY` }}",
+      "MACKEREL_SERVICE_NAME": "{{ must_env `MACKEREL_SERVICE_NAME` }}",
+      "SPREADSHEETID": "{{ must_env `SPREADSHEETID` }}",
+      "SPREADSHEET_CREDENTIALS_JSON": "{{ must_env `SPREADSHEET_CREDENTIALS_JSON` }}",
+      "SPREADSHEET_RANGE": "{{ must_env `SPREADSHEET_RANGE` }}"
+    }
+  },
+  "EphemeralStorage": {
+    "Size": 512
+  },
+  "FunctionName": "{{ must_env `FUNCTION_NAME` }}",
+  "Handler": "handler",
+  "LoggingConfig": {
+    "LogFormat": "Text"
+  },
+  "MemorySize": 512,
+  "Role": "{{ must_env `FUNCTION_ROLE` }}",
+  "Runtime": "go1.x",
+  "SnapStart": {
+    "ApplyOn": "None"
+  },
+  "Tags": {},
+  "Timeout": 300,
+  "TracingConfig": {
+    "Mode": "PassThrough"
+  },
+  "Code": {
+    "S3Bucket": "{{ must_env `S3_BUCKET` }}",
+    "S3Key": "{{ must_env `S3_KEY` }}"
+  }
+}
