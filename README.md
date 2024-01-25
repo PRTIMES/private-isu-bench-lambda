@@ -11,7 +11,7 @@
 ```sh
 GOOS=linux GOARCH=amd64 go build -o benchmarker
 ```
-2. userdataを[こちら](https://github.com/catatsuy/private-isu/tree/master#mac%E3%82%84linux%E4%B8%8A%E3%81%A7%E9%81%A9%E5%BD%93%E3%81%AB%E5%8B%95%E3%81%8B%E3%81%99)を参照して必要なファイルを配置する。Lambdaにデプロイする際のデプロイパッケージの制限を超えないように注意してください。
+2. userdataを[こちら](https://github.com/catatsuy/private-isu/tree/master#mac%E3%82%84linux%E4%B8%8A%E3%81%A7%E9%81%A9%E5%BD%93%E3%81%AB%E5%8B%95%E3%81%8B%E3%81%99)を参照して必要なファイルを配置する。そのまま配置してしまうと、Lambdaにデプロイする際のデプロイパッケージの制限を超えてしまうので画像を削除するなどの対応をしてください。
 3. スプレッドシートを作成し、スプレッドシートIDを取得する。
 4. Googleの認証情報Jsonファイルを取得する。
 5. MackerelでサービスとAPIKeyを作成する。
