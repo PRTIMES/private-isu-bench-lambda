@@ -1,8 +1,8 @@
-private_isu_bench_lambda: main.go
+handler: main.go
 	GOOS=linux GOARCH=amd64 go build -o handler main.go
 
 .PHONY: deploy_private_isu_bench_lambda
-deploy_private_isu_bench_lambda: private_isu_bench_lambda
+deploy_private_isu_bench_lambda: handler
 	MACKEREL_API_KEY='' \
 	MACKEREL_SERVICE_NAME='' \
 	SPREADSHEETID='' \
