@@ -6,6 +6,8 @@
 
 チーム情報をスプレッドシートで管理し、Lambda関数URLをcurlで叩くことでベンチマーカーを動かし、その結果を[Mackerel](https://ja.mackerel.io/)に送信します。
 
+**This is not an official product.**
+
 ## 使い方
 1. [private-isu/benchmarker/](https://github.com/catatsuy/private-isu/tree/master/benchmarker)をビルドし、そのファイルをbinディレクトリに配置する。
 ```sh
