@@ -1,5 +1,5 @@
 handler: main.go
-	GOOS=linux GOARCH=amd64 go build -o handler main.go
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o handler main.go
 
 .PHONY: deploy_private_isu_bench_lambda
 deploy_private_isu_bench_lambda: handler
